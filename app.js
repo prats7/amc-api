@@ -1,16 +1,26 @@
 const express = require("express");
 
+const mysql = require("mysql");
+
 const port = 9000;
 
 const app = express();
 
-app.get("/api", (req, res) => {
-    res.json({
-        success: 1,
-        message: "This APIs is working"
-    });
-});
+const userRouter = require("./routes/user_router");
 
+const db = require("./config/database");
+
+app.use(express.json());
+
+app.use("/api/users",userRouter);
+
+//connect to database
+db.connect((err) => {
+    if(err){
+        throw err;
+    }
+    console.log('MySql connected...');
+});
 
 //listening to server
 app.listen(port, function(err){

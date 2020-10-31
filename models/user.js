@@ -1,11 +1,11 @@
-const pool = require("../config/database");
+const db = require("../config/database");
 
 module.exports = {
     create : (data,callBack) => {
-        pool.query(
+        db.query(
 
-            `insert into registration(id, amc_name, city_type, service_name, part_name, quantity, unit, actual_price, discount, amc_price)
-                values(?,?,?,?,?,?,?,?,?,?)`,
+            `insert into amc_table(amc_name, city_type, service_name, part_name, quantity, unit, actual_price, discount, amc_price)
+                values(?,?,?,?,?,?,?,?,?)`,
                 [
                     data.id,
                     data.amc_name,
