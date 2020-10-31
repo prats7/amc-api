@@ -12,7 +12,7 @@ const db = require("./config/database");
 
 app.use(express.json());
 
-//Add user data to database
+//Add insert data to table 
 app.use("/api/users",userRouter);
 
 //Task 1: Creating database and table for MySql database
