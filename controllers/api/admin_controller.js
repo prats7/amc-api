@@ -1,9 +1,13 @@
 const { register } = require("../../models/admin");
 
+const { genSaltSync, hashSync } = require("bcrypt");
+
 module.exports = {
 
     registerAdmin: (req,res) => {
         const body = req.body;
+        const salt = genSaltSync(10);
+        body.password = hashSync(body.password, salt);
         register(body, (err, results) => {
             if(err){
                 console.log(err);
