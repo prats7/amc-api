@@ -1,8 +1,12 @@
-const { register,login } = require("../../models/admin");
+const {register,login} = require("../../models/admin");
 //Encryption
-const { genSaltSync, hashSync , compareSync} = require("bcrypt");
+const { genSaltSync, hashSync} = require("bcrypt");
 //JWT
 const { sign } = require("jsonwebtoken");
+
+var bcrypt = require("bcrypt");
+
+
 
 module.exports = {
     //Controller for register Admin
@@ -16,17 +20,19 @@ module.exports = {
             if(err){
                 console.log(err);
                 return res.status(500).json({
-                    success: 0,
                     message: "Error in connecting to database"
                 });
             }
             //Success
             return res.status(200).json({
-                success: 1,
                 message: "Admin registered successfully"
             });
         });
     },
+
+
+
+
     //For Admin login
     loginAdmin : (req,res) => {
         const body = req.body;
@@ -38,12 +44,11 @@ module.exports = {
             //If password or user not present in database
             if(!results){
                 return res.json({
-                    success: 0,
-                    message: "Invalid email or password"
+                    data: "Invalid email or password"
                 });
             }
             //Password matching
-            const result = compareSync(body.password, results.password);
+            const result = bcrypt.compare(body.password, results.password);
             if(result){
                 //Creating json web token
                 results.password = undefined;
@@ -52,7 +57,6 @@ module.exports = {
                 });
                 //Success
                 return res.json({
-                    success: 1,
                     message: "login successfully",
                     token: jsontoken
                 });
@@ -60,16 +64,11 @@ module.exports = {
             }else{
                 //Error
                 return res.json({
-                    success: 0,
                     message: "Invalid email or password",
                 });
             }
 
         });
     }
-
-
-
-
 
 };
