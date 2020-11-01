@@ -5,7 +5,7 @@ module.exports = {
     register : (data,callBack) => {
         db.query(
 
-            `insert into amc_table(name, email, password)
+            `insert into admin_table(name, email, password)
                 values(?,?,?)`,
                 [
                     data.name,

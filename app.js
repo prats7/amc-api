@@ -8,12 +8,18 @@ const app = express();
 
 const userRouter = require("./routes/user_router");
 
+const adminRouter = require("./routes/admin_router");
+
 const db = require("./config/database");
 
 app.use(express.json());
 
 //Add insert data to table 
 app.use("/api/users",userRouter);
+
+app.use("/api/admin",adminRouter);
+
+
 
 //Task 1: Creating database and table for MySql database
     app.get('/api/createdb',(req,res) => {
