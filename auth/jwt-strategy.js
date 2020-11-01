@@ -1,20 +1,25 @@
-const jwt = require ("jsonwebtoken");
+
+//Json web token authentication
+const { verify } = require ("jsonwebtoken");
 
 module.exports = {
 
     checkToken : (req,res,next) => {
-        const token = req.get("authorization");
+        let token = req.get("authorization");
         if(token){
             token=token.slice(7);
-            jwt(token,"secret",(err,decoded) => {
+            //Token Verification
+            verify(token,"secret",(err,decoded) => {
+                //Error
                 if(err){
                     res.json({
                         message:"Invalid token"
                     });
                 }else{
-                    next();
+                    next();//Success
                 }
             });
+        //If token doesn't match
         }else{
             res.json({
                 message: "Unauthorized user"

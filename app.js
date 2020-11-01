@@ -9,6 +9,8 @@ const app = express();
 const userRouter = require("./routes/user_router");
 //Admin router
 const adminRouter = require("./routes/admin_router");
+//AMC Invoice router
+const amcRouter = require("./routes/amc_invoice_router");
 
 const db = require("./config/database");
 
@@ -20,6 +22,9 @@ app.use("/api/users",userRouter);
 
 //Admin register and login
 app.use("/api/admin",adminRouter);
+
+//Creating AMC Invoice by Admin
+app.use("/api/invoice",amcRouter);
 
 
 
