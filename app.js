@@ -26,7 +26,7 @@ app.use("/api/admin",adminRouter);
 //Task 1: Creating database and table for MySql database
     app.get('/api/createdb',(req,res) => {
         //Query for creating database
-        let sql = 'CREATE DATABASE nodemysql';
+        let sql = 'CREATE DATABASE nodesql';
         db.query(sql, (err, results) => {
             if(err) throw err;
             console.log(results);
