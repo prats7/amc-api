@@ -1,4 +1,4 @@
-const { create,upgrade } = require("../../models/user");
+const { create,getUsersAmc,upgrade } = require("../../models/user");
 
 module.exports = {
     createUser: (req,res) => {
@@ -18,6 +18,24 @@ module.exports = {
         });
     },
 
+
+    getUsersAmc: (req,res) => {
+        getUsersAmc((err, results) => {
+            if(err){
+                console.log(err);
+                return;
+            }
+            return res.json({
+                success: 1,
+                data: results
+            });
+        });
+
+
+    },
+
+
+
     upgradeService: (req,res) => {
         const body = req.body;
         upgrade(body, (err, results) => {
@@ -25,6 +43,12 @@ module.exports = {
                 console.log(err);
                 return res.status(500).json({
                     message: "Error"
+                });
+            }
+            if(!results){
+                return res.json({
+                    success: 0,
+                    message: "Failed to upgrade service"
                 });
             }
             return res.status(200).json({
