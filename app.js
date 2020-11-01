@@ -25,7 +25,7 @@ app.use("/api/users",userRouter);
         });
 
     });
-    //Create Table
+    //Create Table for user amc 
     app.get('/api/createamctable',(req, res) => {
         let sql = 'CREATE TABLE amc_table(amc_name VARCHAR(255),city_type VARCHAR(45),service_name VARCHAR(45),part_name VARCHAR(45),quantity INT,unit INT,actual_price INT,discount INT,amc_price INT,PRIMARY KEY (amc_name))' ;
         
@@ -35,6 +35,17 @@ app.use("/api/users",userRouter);
             res.send('AMC Table created.');
         });
     });
+
+        //Create Table to store Admin login and register credentials 
+        app.get('/api/createadmintable',(req, res) => {
+            let sql = 'CREATE TABLE admin_table(name VARCHAR(255),email VARCHAR(45),password VARCHAR(45),PRIMARY KEY (email))' ;
+            
+            db.query(sql, (err, results) => {
+                if(err) throw err;
+                console.log(results);
+                res.send('Admin Table created.');
+            });
+        });
 
 
 
