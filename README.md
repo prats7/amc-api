@@ -37,7 +37,13 @@ Admin registration by entering name,email,password
 Admin Login which create jwt token for authentication , using email and password
     POST: http://localhost:9000/api/admin/login
 
-Fetching All
+Fetching All user AMC data by Admin using JWT authentication
+    GET: http://localhost:9000/api/users
+
+Creating AMC by Admin using JWT authentication
+    GET: http://localhost:9000/api/invoice/:amc_name
+
+
 
 
 
